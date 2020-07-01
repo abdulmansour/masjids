@@ -61,4 +61,14 @@ public class PrayerTime {
     public void setMasjid(Masjid masjid) {
         this.masjid = masjid;
     }
+
+    @Override
+    public String toString() {
+        return "PrayerTime{" +
+                "id=" + id +
+                ", prayer=" + prayer +
+                ", time=" + time +
+                ", masjid=" + masjid +
+                '}';
+    }
 }
