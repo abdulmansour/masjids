@@ -42,9 +42,11 @@ public class MasjidController {
      * @throws MasjidNotFoundException extends RuntimeException
      */
     @GetMapping("/masjids/{masjidId}")
-    public ResponseEntity<Masjid> getMasjidById(@PathVariable long masjidId) {
+    public ResponseEntity<Masjid> getMasjidById(@PathVariable Long masjidId) {
         Masjid masjid = masjidService.getMasjidById(masjidId);
         log.info("Masjid info: {}", masjid);
         return ResponseEntity.ok(masjid);
     }
+
+
 }

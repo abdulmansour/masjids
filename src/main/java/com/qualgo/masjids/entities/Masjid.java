@@ -12,7 +12,7 @@ public class Masjid {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Column(name = "address")
     private String address;
@@ -27,11 +27,11 @@ public class Masjid {
     public Masjid() {
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -65,7 +65,6 @@ public class Masjid {
                 "id=" + id +
                 ", address='" + address + '\'' +
                 ", name='" + name + '\'' +
-                ", prayerTimes=" + prayerTimes +
                 '}';
     }
 }

@@ -68,7 +68,6 @@ public class PrayerTime {
                 "id=" + id +
                 ", prayer=" + prayer +
                 ", time=" + time +
-                ", masjid=" + masjid +
                 '}';
     }
 }
