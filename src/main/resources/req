@@ -1,0 +1,42 @@
+## get-add-update-delete masjid:
+-How do we get all masjids? x
+get request /masjids
+
+-How do we get all masjids for a specified date (timings displyed are adjusted based on date being bigger than start and smaller than end)? x
+get request /masjids/date/{date}
+
+-How do we get name, address and timings for a masjid? x
+get request /masjids/{masjidId}
+
+-How do we get name, address and timings for a masjid for a specified date (timings adjusted based on date bigger than start and smaller than end)? x
+get request /masjids/{masjidId}/date/{date}
+
+-How do we add a new masjid? x
+->Provide the name, address and prayer times in a post request to /masjids
+
+-How do we update the name or address or timings of a masjid? x
+->Provide the name or address or timings in a put request to /masjids/{masjidId}
+
+-How do we delete a masjid? x
+->Delete request to /masjids/{masjidId}
+
+## get-add-update-delete prayer time of masjid:
+-How do we get all prayer times? x
+->get request to /timings
+
+-How do we get a prayer time? x
+->get request to /timings/{timingId}
+
+-How do we add a prayer time to a masjid? x
+->Provide the prayer times in a post request to /masjids/{masjidId}/timing
+
+-How do we update the prayer time of a masjid? x
+->Provide the prayer, time, start and end in a put request to /timings/{timingId} x
+
+-How do we delete the prayer time of a masjid? x
+->Delete request to /timings/{timingId}
+
+
+
+
+

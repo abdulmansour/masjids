@@ -1,8 +1,11 @@
 package com.qualgo.masjids.entities;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -20,9 +23,17 @@ public class Masjid {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "created_at")
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    @Column(name = "updated_at")
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
+
     @JsonManagedReference
     @OneToMany(mappedBy = "masjid", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<PrayerTime> prayerTimes;
+    private List<Timing> timings;
 
     public Masjid() {
     }
@@ -51,12 +62,28 @@ public class Masjid {
         this.name = name;
     }
 
-    public List<PrayerTime> getPrayerTimes() {
-        return prayerTimes;
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 
-    public void setPrayerTimes(List<PrayerTime> prayerTimes) {
-        this.prayerTimes = prayerTimes;
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public List<Timing> getTimings() {
+        return timings;
+    }
+
+    public void setTimings(List<Timing> timings) {
+        this.timings = timings;
     }
 
     @Override
@@ -65,6 +92,8 @@ public class Masjid {
                 "id=" + id +
                 ", address='" + address + '\'' +
                 ", name='" + name + '\'' +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
                 '}';
     }
 }
