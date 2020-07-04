@@ -21,20 +21,18 @@ get request /masjids/{masjidId}/date/{date}
 ->Delete request to /masjids/{masjidId}
 
 ## get-add-update-delete prayer time of masjid:
--How do we get all prayer times? x
-->get request to /timings
 
--How do we get a prayer time? x
-->get request to /timings/{timingId}
+-How do we get prayer times for masjid? x
+->get request to /masjids/{masjidId}/timings
 
 -How do we add a prayer time to a masjid? x
-->Provide the prayer times in a post request to /masjids/{masjidId}/timing
+->Provide the prayer times in a post request to /masjids/{masjidId}/timings
 
 -How do we update the prayer time of a masjid? x
-->Provide the prayer, time, start and end in a put request to /timings/{timingId} x
+->Provide the prayer, time, start and end in a put request to masjids/{masjidId}/timings/{timingId} x
 
 -How do we delete the prayer time of a masjid? x
-->Delete request to /timings/{timingId}
+->Delete request to /masjids/{masjidId}/timings/{timingId}
 
 
 
