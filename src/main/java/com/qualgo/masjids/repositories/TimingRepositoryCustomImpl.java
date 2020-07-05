@@ -11,11 +11,4 @@ public class TimingRepositoryCustomImpl implements TimingRepositoryCustom {
     @Autowired
     private EntityManager entityManager;
 
-    @Override
-    @Transactional
-    public void delTiming(Timing timing) {
-        entityManager.createQuery("delete from Timing where id=:id")
-                .setParameter("id", timing.getId())
-                .executeUpdate();
-    }
 }

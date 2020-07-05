@@ -13,6 +13,7 @@ public class MasjidRepositoryCustomImpl implements MasjidRepositoryCustom {
     private EntityManager entityManager;
 
     @Override
+    @Transactional
     public Timing addTimingToMasjid(Masjid masjid) {
         return null;
     }

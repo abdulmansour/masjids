@@ -2,6 +2,7 @@ package com.qualgo.masjids.controllers;
 
 import com.qualgo.masjids.entities.Masjid;
 import com.qualgo.masjids.entities.Timing;
+import com.qualgo.masjids.exceptions.InvalidTimingRangeException;
 import com.qualgo.masjids.services.MasjidService;
 import com.qualgo.masjids.services.TimingService;
 import org.slf4j.Logger;
@@ -15,6 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api")
 public class TimingController {
@@ -45,10 +47,21 @@ public class TimingController {
      * @param timingRequest
      * @param masjidId
      * @return newly created timing
+     * @throws InvalidTimingRangeException
      */
     @PostMapping("/masjids/{masjidId}/timings")
     public ResponseEntity<Timing> addTimingToMasjid(@Valid @RequestBody Timing timingRequest, @PathVariable final Long masjidId) {
         Masjid masjid = masjidService.getMasjidById(masjidId);
+        for (Timing timing:masjid.getTimings()) {
+            if (timing.getPrayer().equals(timingRequest.getPrayer())) {
+                if (!timingRequest.getStart().isBefore(timing.getStart()) && !timingRequest.getStart().isAfter(timing.getEnd())) {
+                    throw new InvalidTimingRangeException("Timing request start (" + timingRequest.getStart() + ") is conflicting with timing " + timing);
+                }
+                if (!timingRequest.getEnd().isBefore(timing.getStart()) && !timingRequest.getEnd().isAfter(timing.getEnd())) {
+                    throw new InvalidTimingRangeException("Timing request end (" + timingRequest.getEnd() + ") is conflicting with timing " + timing);
+                }
+            }
+        }
         timingRequest.setMasjid(masjid);
         Timing newTiming = timingService.persistTiming(timingRequest);
         log.info("New timing added for masjid - {}: {}", masjidId, newTiming);
@@ -73,17 +86,37 @@ public class TimingController {
             timing.setPrayer(timingRequest.getPrayer());
         if (timingRequest.getTime() != null)
             timing.setTime(timingRequest.getTime());
-        if (timingRequest.getStart() != null)
+        if (timingRequest.getStart() != null) {
+            for (Timing t : masjid.getTimings()) {
+                if (t.getId() == timingId)
+                    continue;
+                if (t.getPrayer().equals(timingRequest.getPrayer())) {
+                    if (!timingRequest.getStart().isBefore(timing.getStart()) && !timingRequest.getStart().isAfter(timing.getEnd())) {
+                        throw new InvalidTimingRangeException("Timing request start (" + timingRequest.getStart() + ") is conflicting with timing " + t);
+                    }
+                }
+            }
             timing.setStart(timingRequest.getStart());
-        if (timingRequest.getEnd() != null)
+        }
+        if (timingRequest.getEnd() != null) {
+            for (Timing t : masjid.getTimings()) {
+                if (t.getId() == timingId)
+                    continue;
+                if (t.getPrayer().equals(timingRequest.getPrayer())) {
+                    if (!timingRequest.getEnd().isBefore(timing.getStart()) && !timingRequest.getEnd().isAfter(timing.getEnd())) {
+                        throw new InvalidTimingRangeException("Timing request end (" + timingRequest.getEnd() + ") is conflicting with timing " + t);
+                    }
+                }
+            }
             timing.setEnd(timingRequest.getEnd());
+        }
         if (timingRequest.getDelay() != null)
             timing.setDelay(timingRequest.getDelay());
         if (timingRequest.getAtAdhan() != null)
             timing.setAtAdhan(timingRequest.getAtAdhan());
 
         Timing updatedTiming = timingService.persistTiming(timing);
-        log.info("Updated Timing for masjid - {}: {}", masjidId, updatedTiming);
+        log.info("Updated Timing {} - Masjid {}", timingId, masjidId);
 
         return ResponseEntity.ok(updatedTiming);
     }
@@ -97,13 +130,13 @@ public class TimingController {
      */
     @DeleteMapping("/masjids/{masjidId}/timings/{timingId}")
     public ResponseEntity deleteTiming(@PathVariable final Long timingId, @PathVariable final Long masjidId) {
-        Masjid masjid = masjidService.getMasjidById(masjidId);
         Timing timing = timingService.getTimingById(timingId);
-        timingService.delTiming(timing);
-        log.info("Deleted Timing info: {}", timing);
+        timing.setMasjid(null);
+        timingService.deleteTiming(timing);
+        log.info("Deleted Timing {} - Masjid {}", timingId, masjidId);
 
         Map<String, Boolean> response = new HashMap<>();
-        response.put("Deleted timing with id - " + timingId, true);
+        response.put("Deleted timing " + timingId + " - Masjid " + masjidId, true);
 
         return ResponseEntity.ok(response);
     }

@@ -32,7 +32,7 @@ public class Masjid {
     private LocalDateTime updatedAt;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "masjid", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "masjid", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Timing> timings;
 
     public Masjid() {

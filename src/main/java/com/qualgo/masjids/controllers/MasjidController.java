@@ -1,7 +1,6 @@
 package com.qualgo.masjids.controllers;
 
 import com.qualgo.masjids.entities.Masjid;
-import com.qualgo.masjids.entities.Timing;
 import com.qualgo.masjids.exceptions.MasjidNotFoundException;
 import com.qualgo.masjids.services.MasjidService;
 import org.slf4j.Logger;
@@ -18,6 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api")
 public class MasjidController {

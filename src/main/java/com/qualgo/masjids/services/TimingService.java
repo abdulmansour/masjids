@@ -9,5 +9,7 @@ public interface TimingService {
     List<Timing> getTimings();
     Timing getTimingById(Long id);
     Timing persistTiming(Timing timing);
-    void delTiming(Timing timing);
+    void deleteTiming(Timing timing);
+    Timing findTimingByIdAndMasjid(Long timingId, Masjid masjid);
+    void deleteTimingByIdAndMasjid(Long timingId, Masjid masjid);
 }

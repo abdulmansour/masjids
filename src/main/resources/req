@@ -35,6 +35,8 @@ get request /masjids/{masjidId}/date/{date}
 ->Delete request to /masjids/{masjidId}/timings/{timingId}
 
 
-
-
-
+TODO:
+fix 'api/masjids/{masjidId}/timings/{timingId}': delete request to properly delete the timing and the relationship x
+fix 'masjids/{masjidId}/timings/{timingId}': put request to properly account for start/end range when updating timing x
+fix range to account for after, on the day of, before x
+modify front-end api to pass masjids by today's date x

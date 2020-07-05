@@ -49,7 +49,7 @@ public class Timing {
     private LocalDateTime updatedAt;
 
     @JsonBackReference
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinTable(name="masjids_timings",
             joinColumns = @JoinColumn(name = "timing_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "masjid_id", referencedColumnName = "id")

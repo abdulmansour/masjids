@@ -27,7 +27,6 @@ public class DefaultMasjidService implements MasjidService {
         return masjidRepository.findById(masjidId).orElseThrow(() -> new MasjidNotFoundException("Masjid not found for id: " + masjidId));
 
     }
-
     @Override
     public Masjid persistMasjid(Masjid masjid) {
         return masjidRepository.save(masjid);
