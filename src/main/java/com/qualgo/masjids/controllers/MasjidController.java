@@ -126,8 +126,6 @@ public class MasjidController {
             masjid.setAddress(masjidRequest.getAddress());
         if(masjidRequest.getZoneId() != null)
             masjid.setZoneId(masjidRequest.getZoneId());
-        if(masjidRequest.getUtcOffset() != null)
-            masjid.setUtcOffset(masjidRequest.getUtcOffset());
 
         Masjid updatedMasjid = masjidService.persistMasjid(masjid);
         log.info("Updated Masjid info: {}", masjid);

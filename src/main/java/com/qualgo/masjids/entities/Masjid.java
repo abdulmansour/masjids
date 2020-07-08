@@ -25,10 +25,7 @@ public class Masjid {
     private String name;
 
     @Column(name = "zone_id")
-    private ZoneId zoneId;
-
-    @Column(name = "utc_offset")
-    private String utcOffset;
+    private String zoneId;
 
     @Column(name = "created_at")
     @CreationTimestamp
@@ -61,20 +58,12 @@ public class Masjid {
         this.address = address;
     }
 
-    public ZoneId getZoneId() {
+    public String getZoneId() {
         return zoneId;
     }
 
-    public void setZoneId(ZoneId zoneId) {
+    public void setZoneId(String zoneId) {
         this.zoneId = zoneId;
-    }
-
-    public String getUtcOffset() {
-        return utcOffset;
-    }
-
-    public void setUtcOffset(String utcOffset) {
-        this.utcOffset = utcOffset;
     }
 
     public String getName() {
