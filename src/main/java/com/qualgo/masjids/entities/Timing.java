@@ -6,9 +6,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.time.*;
 
 @Entity
 @Table(name = "timings")
@@ -145,6 +143,8 @@ public class Timing {
                 "id=" + id +
                 ", prayer=" + prayer +
                 ", time=" + time +
+                ", isAtAdhan=" + isAtAdhan +
+                ", delay=" + delay +
                 ", start=" + start +
                 ", end=" + end +
                 ", createdAt=" + createdAt +

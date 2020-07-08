@@ -6,6 +6,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 
 @Entity
@@ -22,6 +23,12 @@ public class Masjid {
 
     @Column(name = "name")
     private String name;
+
+    @Column(name = "zone_id")
+    private ZoneId zoneId;
+
+    @Column(name = "utc_offset")
+    private String utcOffset;
 
     @Column(name = "created_at")
     @CreationTimestamp
@@ -52,6 +59,22 @@ public class Masjid {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public ZoneId getZoneId() {
+        return zoneId;
+    }
+
+    public void setZoneId(ZoneId zoneId) {
+        this.zoneId = zoneId;
+    }
+
+    public String getUtcOffset() {
+        return utcOffset;
+    }
+
+    public void setUtcOffset(String utcOffset) {
+        this.utcOffset = utcOffset;
     }
 
     public String getName() {
@@ -92,6 +115,7 @@ public class Masjid {
                 "id=" + id +
                 ", address='" + address + '\'' +
                 ", name='" + name + '\'' +
+                ", zoneId=" + zoneId +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';

@@ -46,7 +46,6 @@ public class MasjidController {
      */
     @GetMapping("/masjids/date/{date}")
     public ResponseEntity<List<Masjid>> getMasdjidsByDate(@PathVariable final String date) {
-        //default, ISO_LOCAL_DATE - "yyyy-MM-d" - 2020-06-21
         LocalDate currentDate = LocalDate.parse(date);
 
         List<Masjid> masjids = masjidService.getMasjids();
@@ -80,7 +79,6 @@ public class MasjidController {
      */
     @GetMapping("/masjids/{masjidId}/date/{date}")
     public ResponseEntity<Masjid> getMasdjidByDate(@PathVariable final Long masjidId, @PathVariable final String date) {
-        //default, ISO_LOCAL_DATE - "yyyy-MM-d" - 2020-06-21
         LocalDate currentDate = LocalDate.parse(date);
 
         Masjid masjid = masjidService.getMasjidById(masjidId);
@@ -126,6 +124,10 @@ public class MasjidController {
             masjid.setName(masjidRequest.getName());
         if (masjidRequest.getAddress() != null)
             masjid.setAddress(masjidRequest.getAddress());
+        if(masjidRequest.getZoneId() != null)
+            masjid.setZoneId(masjidRequest.getZoneId());
+        if(masjidRequest.getUtcOffset() != null)
+            masjid.setUtcOffset(masjidRequest.getUtcOffset());
 
         Masjid updatedMasjid = masjidService.persistMasjid(masjid);
         log.info("Updated Masjid info: {}", masjid);
