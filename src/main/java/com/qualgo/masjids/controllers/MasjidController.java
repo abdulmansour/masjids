@@ -122,10 +122,30 @@ public class MasjidController {
 
         if (masjidRequest.getName() != null)
             masjid.setName(masjidRequest.getName());
-        if (masjidRequest.getAddress() != null)
-            masjid.setAddress(masjidRequest.getAddress());
-        if(masjidRequest.getZoneId() != null)
+        if (masjidRequest.getAddressLine() != null)
+            masjid.setAddressLine(masjidRequest.getAddressLine());
+        if (masjidRequest.getState() != null)
+            masjid.setState(masjidRequest.getState());
+        if (masjidRequest.getCity() != null)
+            masjid.setCity(masjidRequest.getCity());
+        if (masjidRequest.getZip() != null)
+            masjid.setZip(masjidRequest.getZip());
+        if (masjidRequest.getCountry() != null)
+            masjid.setCountry(masjidRequest.getCountry());
+        if (masjidRequest.getPhoneNumber() != null)
+            masjid.setPhoneNumber(masjidRequest.getPhoneNumber());
+        if (masjidRequest.getZoneId() != null)
             masjid.setZoneId(masjidRequest.getZoneId());
+        if (masjidRequest.getLatitude() != null)
+            masjid.setLatitude(masjidRequest.getLatitude());
+        if (masjidRequest.getLongitude() != null)
+            masjid.setLongitude(masjidRequest.getLongitude());
+        if (masjidRequest.getWebsite() != null)
+            masjid.setWebsite(masjidRequest.getWebsite());
+        if (masjidRequest.getFacebook() != null)
+            masjid.setFacebook(masjidRequest.getFacebook());
+        if (masjidRequest.getInstagram() != null)
+            masjid.setInstagram(masjidRequest.getInstagram());
 
         Masjid updatedMasjid = masjidService.persistMasjid(masjid);
         log.info("Updated Masjid info: {}", masjid);
